@@ -1,0 +1,93 @@
+{% extends "base.html" %} 
+{% block title %}Admin{% endblock %}
+{%  block navbar %}
+{%  include 'navbar.html' %}
+{%  endblock %}
+{% block content%}
+    <div class="container mt-5">
+        <h1 class="text-center">Statistics</h1>
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Active Users</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Role</th>
+                                    <th>Count</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Sponsor & Influencer</td>
+                                    <td>{{ stats.active_users }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Campaigns</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Visibility</th>
+                                    <th>Count</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Public Campaigns</td>
+                                    <td>{{ stats.public_campaigns }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Private Campaigns</td>
+                                    <td>{{ stats.private_campaigns }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Flagged Users</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Count</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Flagged Influencers</td>
+                                    <td>{{ stats.flagged_influencers }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Flagged Sponsors</td>
+                                    <td>{{ stats.flagged_sponsors }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{%  endblock %}

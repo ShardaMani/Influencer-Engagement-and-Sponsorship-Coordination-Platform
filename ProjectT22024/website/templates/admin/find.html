@@ -1,0 +1,176 @@
+{% extends "base.html" %} 
+{% block title %}Admin{% endblock %}
+{%  block navbar %}
+{%  include 'navbar.html' %}
+{%  endblock %}
+{% block content%}
+<form method="POST" class="d-flex">
+    <select class="form-select" aria-label="Select entity"  name="entity" required>
+        <label for="entity" class="form-select">Select entity </label>
+        <option value="Campaign">Campaign</option>
+        <option value="Influencer">Influencer</option>
+        <option value="Sponsor">Sponsor</option>
+        <option value="Request">Request</option>
+    </select>
+    <button type="submit" class="btn-primary">Show</button>
+</form>
+{% if entity=="Campaign" %}
+    <div class="container container-fluid mx-auto mt-5 border">
+        <h2>
+            Ongoing campaigns:
+        </h2>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Campaign Id</th>
+                <th>Campaign Name</th>
+                <th>Description</th>
+                <th>Goals</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Budget</th>
+                <th>Visibility</th>
+                <th>Action</th>
+            </tr> 
+            </thead>
+            <tbody>
+                {% for campaign in item %}
+                <tr>
+                    <td>{{campaign.id}}</td>
+                    <td>{{campaign.name}}</td>
+                    <td>{{campaign.description}}</td>
+                    <td>{{campaign.goals}}</td>
+                    <td>{{campaign.start_date}}</td>
+                    <td>{{campaign.end_date}}</td>
+                    <td>{{campaign.budget}}</td>
+                    <td>{{campaign.visibility}}</td>
+                    <td>
+                        {% if campaign.flagged %}
+                        <a href="{{url_for('admin.unflag_entity', id=campaign.id, entity='Campaign')}}">Unflag</a>
+                        <a href="{{url_for('admin.remove_entity', id=campaign.id, entity='Campaign')}}">Remove</a>
+                        {% endif %}
+                        {% if not campaign.flagged %}
+                        <a href="{{url_for('admin.flag_entity', id=campaign.id,entity='Campaign')}}">Flag</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+
+    {% if entity == "Influencer" %}
+    <div class="container container-fluid mx-auto mt-5 border">
+        <h2>
+            Registered Influencers
+        </h2>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Influencer Id</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Category</th>
+                <th>Niche</th>
+                <th>Platform Presence</th>
+                <th>Followers</th>
+                <th>Action</th>
+            </tr> 
+            </thead>
+            <tbody>
+                {%  for influencer in item %}
+                <tr>
+                    <td>{{influencer.id}}</td>
+                    <td>{{influencer.name}}</td>
+                    <td>{{influencer.gender}}</td>
+                    <td>{{influencer.category}}</td>
+                    <td>{{influencer.niche}}</td>
+                    <td>{{influencer.platform_presence}}</td>
+                    <td>{{influencer.followers}}</td>
+                    
+                    <td>
+                        {% if influencer.flagged %}
+                        <a href="{{url_for('admin.unflag_entity', id=influencer.id, entity = 'Influencer')}}">Unflag</a>
+                        <a href="{{url_for('admin.remove_entity', id=influencer.id, entity = 'Influencer')}}">Remove</a>
+                        {% endif %}
+                        {% if not influencer.flagged %}
+                        <a href="{{url_for('admin.flag_entity', id=influencer.id, entity = 'Influencer')}}">Flag</a>
+                        {% endif %}
+                        
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endif %}
+
+{% if entity == "Sponsor" %}
+<div class="container container-fluid mx-auto mt-5 border">
+    <h2>
+        Registered Sponsors:
+    </h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Sponsor Id</th>
+            <th>Company Name</th>
+            <th>Industry</th>
+            <th>Budget</th>
+            <th>Action</th>
+        </tr> 
+        </thead>
+        <tbody>
+            {%  for sponsor in item %}
+            <tr>
+                <td>{{sponsor.id}}</td>
+                <td>{{sponsor.company_name}}</td>
+                <td>{{sponsor.industry}}</td>
+                <td>{{sponsor.budget}}</td>
+                <td>
+                    {% if sponsor.flagged %}
+                        <a href="{{url_for('admin.unflag_entity', id=sponsor.id,  entity = 'Sponsor')}}">Unflag</a>
+                        <a href="{{url_for('admin.remove_entity', id=sponsor.id,  entity = 'Sponsor')}}">Remove</a>
+                        {% endif %}
+                        {% if not sponsor.flagged %}
+                        <a href="{{url_for('admin.flag_entity', id=sponsor.id, entity = 'Sponsor')}}">Flag</a>
+                        {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+{% if entity == "Request" %}
+    <div class="container container-fluid mx-auto mt-5 border">
+        <h2>
+            Ad Requests
+        </h2>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Request Id</th>
+                <th>message</th>
+                <th>Requirements</th>
+                <th>Payment</th>
+                <th>Status</th>
+            </tr> 
+            </thead>
+            <tbody>
+                {%  for request in item %}
+                <tr>
+                    <td>{{request.id}}</td>
+                    <td>{{request.message}}</td>
+                    <td>{{request.requirements}}</td>
+                    <td>{{request.payment}}</td>
+                    <td>{{request.status}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">Connctus</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      {% if current_user.role == 'Influencer' %}
+      <a class="nav-link active" aria-current="page" href="{{ url_for('influencer.dashboard') }}">Profile</a>
+      <a class="nav-link active" aria-current="page" href="{{ url_for('influencer.view_requests') }}">Requests</a>
+      <a class="nav-link active" aria-current="page" href="{{ url_for('influencer.search_campaigns') }}">Find</a>
+      <a class="nav-link active" href="{{ url_for('auth.logout') }}">Logout</a>
+
+      {% elif current_user.role == 'Sponsor' %}
+      <a class="nav-link active" aria-current="page" href="{{ url_for('sponsor.profile') }}">Profile</a>
+      <a class="nav-link active" aria-current="page" href="{{ url_for('sponsor.view_campaign') }}">Dashbaord</a>
+      <a class="nav-link active" aria-current="page" href="{{ url_for('sponsor.view_requests') }}">Requests</a>
+      <a class="nav-link active" aria-current="page" href="{{ url_for('sponsor.search_influencer') }}">search for influencer</a>
+      <a class="nav-link active" href="{{ url_for('auth.logout') }}">Logout</a>
+
+      {% elif current_user.role == 'Admin' %}
+      <a class="nav-link active" aria-current="page" href="{{ url_for('admin.dashboard') }}">Dashboard</a>
+      <a class="nav-link active" aria-current="page" href="{{ url_for('admin.view_entity') }}">Find</a>
+      <a class="nav-link active" href="{{ url_for('auth.logout') }}">Logout</a>
+      
+      {% else %}
+      <a class="nav-item nav-link active" href="{{ url_for('auth.login') }}">Login <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link active" href="{{ url_for('auth.register') }}">Register</a>
+
+      {% endif %}
+    </div> 
+  </div>
+</nav>

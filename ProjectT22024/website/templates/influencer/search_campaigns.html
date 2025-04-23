@@ -1,0 +1,42 @@
+{% extends "base.html" %} 
+{% block title %}Influencer{% endblock %}
+{%  block navbar %}
+{%  include 'navbar.html' %}
+{%  endblock %}
+{%  block content %}
+
+<h1>Search Campaigns</h1>
+<form method="post">
+    <input type="text" name="search">
+    <button type="submit">Search</button>
+</form>
+<h2>Results:</h2>
+<div class="container mt-5">
+    <h2 class="mb-4">Campaigns</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Sponsor ID</th>
+                <th>Campaign ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for campaign in campaigns %}
+            <tr>
+                <td>{{ campaign.sponsor_id }}</td>
+                <td>{{ campaign.id }}</td>
+                <td>{{ campaign.name }}</td>
+                <td>{{ campaign.description }}</td>
+                <td>{{ campaign.start_date }}</td>
+                <td>{{ campaign.end_date }}</td>
+                <td><a href="{{ url_for('influencer.send_request') }}" class="btn btn-primary">Send Request</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %} 
+{% block title %}Influencer{% endblock %}
+{%  include 'navbar.html' %}
+{% block content%}
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+        {{ message }}
+        </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <div class="container mt-5">
+        <h1>Influencer Profile</h1>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Profile Details</h5>
+                <p class="card-text"><strong>Name:</strong> {{ influencer.name }}</p>
+                <p class="card-text"><strong>Gender:</strong> {{ influencer.gender }}</p>
+                <p class="card-text"><strong>Category:</strong> {{ influencer.category }}</p>
+                <p class="card-text"><strong>Niche:</strong> {{ influencer.niche }}</p>
+                <p class="card-text"><strong>Followers:</strong> {{ influencer.followers }}</p>
+                <p class="card-text"><strong>Contact:</strong> {{ influencer.contact }}</p>
+                <p class="card-text"><strong>Platform Presence:</strong> {{ influencer.platform_presence }}</p>
+                <a href="{{ url_for('influencer.profile') }}" class="btn btn-primary">Edit Profile</a>
+            </div>
+{% endblock %}

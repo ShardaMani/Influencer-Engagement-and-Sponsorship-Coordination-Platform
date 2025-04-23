@@ -1,0 +1,45 @@
+{% extends "base.html" %} 
+{% block title %}Campaign{% endblock %}
+{%  block navbar %}
+{%  include 'navbar.html' %}
+{%  endblock %}
+{% block content%} 
+
+    <h1>Campaigns</h1>
+
+    <a href="{{ url_for('sponsor.add_campaign') }}">Create New Campaign</a>
+    <div class="container mx-auto mt-5">
+
+    {% if campaigns %}    
+    <table class="table table-info">
+        <thead>
+          <tr class="table-success" >
+                <th scope="col">Id</th>
+                <th scope="col">Campaign Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Budget</th>
+                <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for campaign in campaigns %}
+            <tr>
+                <td>{{ campaign.id }}</td>
+                <td scope="row">{{ campaign.name }}</td>
+                <td>{{ campaign.description }}</td>
+                <td>{{ campaign.budget }}</td>
+                <td>
+                    <form action="{{ url_for('sponsor.delete_campaign', id=campaign.id) }}" method="post" style="display:inline;">
+                        <button class="btn btn-danger" type="submit">Delete</button>
+                    </form>
+                    <a class="btn btn-primary" href="{{ url_for('sponsor.edit_campaign', id=campaign.id) }}">Edit</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+      
+    {% endif %}
+    </div>
+{% endblock %}
+

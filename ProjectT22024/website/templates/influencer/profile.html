@@ -1,0 +1,62 @@
+{% extends "base.html" %} 
+{% block title %}Influencer{% endblock %}
+{%  include 'navbar.html' %}
+{% block content%}
+<form method="POST" action="{{ url_for('influencer.profile') }}">
+  <!-- Your form fields here -->
+  <label class="form-label">Edit Name</label>
+  <input type="text" name="name" placeholder="Name">
+  <!-- Other fields -->
+  <div class="form-group">
+    <label for="gender">Select Gender</label>
+    <select class="form-select" aria-label="Default select example" name="gender">
+      <option value="{{ influencer.gender }}" selected>{{ influencer.gender }}</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>  
+    </select>
+  </div>
+  <div class="form-group">
+    <label class="form-label">Contact Details</label>
+    <input type="text" class="form-control" name="contact"  value="{{influencer.contact}}"/>
+  </div>
+  <div class="form-group">
+    <label class="form-label">Change Password</label>
+    <input type="password" class="form-control" name="password" />
+  </div>
+  <div class="form-group">
+    <label class="form-label">Category</label>
+    <select class="form-select hover-shadow" name="category" required>
+      <option selected>{{influencer.category}}</option>
+      <option value="Fashion and Beauty">Fashion and Beauty</option>
+      <option value="Health and Fitness">Health and Fitness</option>
+      <option value="Technology and Gadgets">Technology and Gadgets</option>
+      <option value="Food and Beverage">Food and Beverage</option>
+      <option value="Education and E-Learning">Education and E-Learning</option>
+      <option value="Technology and Gadgets">Environmental and Sustainability</option>
+      <option value="Sports and Outdoor Activities">Sports and Outdoor Activities</option>
+  </select>
+  </div>
+  <div class="form-group">
+    <label class="form-label">Niche</label>
+    <input type="text" class="form-control" name="niche" value="{{influencer.niche}}"/>
+  </div>
+  <div class="form-group">
+    <label for="platform_presence">Select Platform</label>
+    <select class="form-select hover-shadow" name="platform_presence" required>
+        <option selected>{{influencer.platform_presence}}</option>
+        <option value="Youtube">Youtube</option>
+        <option value="Instagram">Instagram</option>
+        <option value="Twitter">Twitter</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label class="form-label">Followers</label>
+    <input type="integer" class="form-control" name="followers" value="{{influencer.followers}}"/>
+  </div>
+  <button type="submit">Update Profile</button>
+  
+</form> 
+
+{%  endblock %}
+
+

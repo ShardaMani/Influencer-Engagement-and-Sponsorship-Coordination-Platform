@@ -1,0 +1,71 @@
+{% extends "base.html" %} 
+{% block title %}Sponsor{% endblock %}
+{%  block navbar %}
+{%  include 'navbar.html' %}
+{%  endblock %}
+{% block content%}
+<div class="container">
+
+    <h2>Received Requests</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Message</th>
+                <th>Requirements</th>
+                <th>Payment</th>
+                <th>Status</th>
+                <th>Campaign</th>
+                <th>Influencer</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for request in received_requests %}
+            <tr>
+                <td>{{ request.message }}</td>
+                <td>{{ request.requirements }}</td>
+                <td>{{ request.payment }}</td>
+                <td>{{ request.status }}</td>
+                <td>{{ request.campaign.name }}</td>
+                <td>{{ request.influencer.name }}</td>
+                <td>
+                    
+                    <form method="POST" action="{{ url_for('sponsor.handle_new_requests', id=request.id) }}">
+                        <button type="submit" name="action" value="accept" class="btn btn-success">Accept</button>
+                        <button type="submit" name="action" value="reject" class="btn btn-danger">Reject</button>
+                    </form>
+                    
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <h2>Sent Requests</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Message</th>
+                <th>Requirements</th>
+                <th>Payment</th>
+                <th>Status</th>
+                <th>Campaign</th>
+                <th>Influencer</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for request in sent_requests %}
+            <tr>
+                <td>{{ request.message }}</td>
+                <td>{{ request.requirements }}</td>
+                <td>{{ request.payment }}</td>
+                <td>{{ request.status }}</td>
+                <td>{{ request.campaign.name }}</td>
+                <td>{{ request.influencer.name }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
